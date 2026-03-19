@@ -133,7 +133,7 @@ function Card() {
   );
 }
 
-//story card display
+//story card display==============================================================================
 
 
 
@@ -143,10 +143,10 @@ function Scard() {
   const [story, setStory] = useState("");
   const [stories, setStories] = useState([]);
   const [category,setCategory]=useState();
-
+  const [filter,setFilter]=useState("all");
   const handleSubmit = () => {
     if(!name||!story||!category) return;
-    const newStory = { name, story,category,time:"just now" };
+    const newStory = { name, story,category:category.toLowerCase(),time: new Date().toString(),id: Date.now() };
 
     setStories([...stories, newStory]);
 
@@ -216,13 +216,29 @@ style={{width:"100%",padding:"10px",marginTop:"10px",borderRadius:"5px",border:"
   Post Story 🚀
 </button>
 
+<button onClick={()=>setFilter("all")}>All</button>
+<button onClick={()=>setFilter("family")}
+  style={{
+    background:filter==="family"? "#007bff" : "#ccc",color:"white",margin:"5px"
+  }}
+  >Family</button>
+
+<button onClick={()=>setFilter("relationship")}
+  style={{
+    background:filter==="relationship"? "#007bff" : "#ccc",color:"white",margin:"5px"
+  }}
+  >Relationship</button>
       <hr />
 
       <h2>Stories</h2>
 
-      {stories.map((s, index) => (
-        <StoryCard key={index} name={s.name} story={s.story} category={s.category} time={s.time} />
-      ))}
+     
+      {stories
+  .filter((s)=>{if(filter==="all") return true;
+    return s.category.toLowerCase()===filter;
+  })
+  .map((s)=>(<StoryCard key={s.id}  name={s.name} story={s.story} category={s.category} time={s.time}/>))
+}
     </div>
   );
 }

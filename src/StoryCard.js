@@ -1,5 +1,5 @@
 import { useState } from "react";
-import profileIMG from "./girax.jpg";
+import profileIMG from "./images/girax.jpg";
 function StoryCard({ name, story,category,time }) {
   const [likes, setLikes] = useState(0);
 
@@ -12,9 +12,8 @@ function StoryCard({ name, story,category,time }) {
       boxShadow: "0 2px 5px rgba(0,0,0,0.1)"
     }}>
       <div style={{display:"flex",alignments:"center"}}>
-<image
+<img
 src={profileIMG}
-
 alt="profile"
 style={{
   borderRadius:"50%",marginRight:"10px",width:"100px",height:"100px"
